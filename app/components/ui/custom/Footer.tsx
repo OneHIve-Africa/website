@@ -51,9 +51,22 @@ const Footer: React.FC = () => {
 
         {/* Buttons */}
         <div className="flex flex-wrap gap-4 justify-center">
-          <DynaButtons name="Login" variant="outlinewhite" path="/contact" />
-          <DynaButtons name="Sponsor" variant="solidwhite" path="/partner" />
-          <DynaButtons name="Invest" variant="solid" path="/investor" />
+          <a 
+            href="https://app.onehiveafrica.com/login"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-bold font-['Plus Jakarta Sans'] transition-colors px-6 py-3 text-white border border-white rounded-md hover:bg-white hover:text-[#1b9d3c] min-w-[120px] text-center"
+          >
+            Login
+          </a>
+          <a 
+            href="https://app.onehiveafrica.com/register"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-bold font-['Plus Jakarta Sans'] transition-colors px-6 py-3 text-oha__green bg-white rounded-md hover:bg-white/80 min-w-[120px] text-center"
+          >
+            Get Started
+          </a>
         </div>
 
         {/* Footer Links */}

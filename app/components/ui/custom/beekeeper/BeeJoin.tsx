@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "../../button";
 import back from "~/assets/back.png";
 
 const BeeJoin: React.FC = () => {
@@ -13,16 +12,30 @@ const BeeJoin: React.FC = () => {
           Join the One Hive Africa Family
         </h1>
         <p className="text-center text-wrap text-lg leading-8 lg:w-[800px]">
-          Become part of a growing network of farmers dedicated to making a
-          difference through sustainable beekeeping. With One Hive Africa, you
+          Our platform is live! Become part of a growing network of farmers
+          dedicated to making a difference through sustainable beekeeping. With
+          One Hive Africa, you
           {"'"}re not just a beekeeper; you{"'"}re a change-maker, helping to
           create a better future for yourself, your community, and the
           environment.
         </p>
-        <div className="flex gap-10">
-          <Button className="bg-white text-oha__green rounded-md shadow font-semibold text-lg px-10 py-7">
-            Sign Up
-          </Button>
+        <div className="flex gap-6 flex-wrap justify-center">
+          <a
+            href="https://app.onehiveafrica.com/register"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-white text-oha__green rounded-md shadow font-semibold text-lg px-8 py-3 hover:bg-gray-50 transition-colors text-center inline-block min-w-[140px]"
+          >
+            Get Started
+          </a>
+          <a
+            href="https://app.onehiveafrica.com/login"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-transparent border-2 border-white text-white rounded-md shadow font-semibold text-lg px-8 py-3 hover:bg-white hover:text-oha__green transition-colors text-center inline-block min-w-[140px]"
+          >
+            Login
+          </a>
         </div>
       </div>
     </div>

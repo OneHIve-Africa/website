@@ -25,16 +25,22 @@ const navItems: NavItem[] = [
 ];
 
 const actionButtons: ActionButton[] = [
-  { name: "Login", path: "/contact", variant: "link" },
-  { name: "Sponsor", path: "#", variant: "outline" },
-  { name: "Invest", path: "/investor", variant: "solid" },
+  {
+    name: "Login",
+    path: "https://app.onehiveafrica.com/login",
+    variant: "link",
+  },
+  {
+    name: "Get Started",
+    path: "https://app.onehiveafrica.com/register",
+    variant: "solid",
+  },
+  // { name: "Invest", path: "/investor", variant: "solid" },
 ];
 
 const NavigationHeader: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isSticky, setIsSticky] = useState<boolean>(false);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [menuAnimating, setMenuAnimating] = useState<boolean>(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
@@ -69,8 +75,6 @@ const NavigationHeader: React.FC = () => {
     }
   };
 
-  const toggleModal = (): void => setIsModalOpen(!isModalOpen);
-
   const getButtonStyles = (variant: ActionButton["variant"]): string => {
     const baseStyles =
       "text-sm font-bold font-['Plus Jakarta Sans'] transition-colors";
@@ -90,15 +94,6 @@ const NavigationHeader: React.FC = () => {
   const handleScroll = () => {
     const scrollTop = window.scrollY;
     setIsSticky(scrollTop > 50);
-  };
-
-  const simulateRequest = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      setIsModalOpen(false);
-      alert("Sponsor request sent successfully!");
-    }, 2000);
   };
 
   useEffect(() => {
@@ -183,13 +178,16 @@ const NavigationHeader: React.FC = () => {
             <div className="hidden lg:flex items-center gap-2 xl:gap-4">
               {actionButtons.map((button) => (
                 <React.Fragment key={button.name}>
-                  {button.name === "Sponsor" ? (
-                    <button
-                      onClick={toggleModal}
+                  {button.name === "Create Account" ||
+                  button.name === "Login" ? (
+                    <a
+                      href={button.path}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={getButtonStyles(button.variant)}
                     >
                       {button.name}
-                    </button>
+                    </a>
                   ) : (
                     <Link
                       to={button.path}
@@ -205,57 +203,49 @@ const NavigationHeader: React.FC = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu with Circle Animation */}
+      {/* Mobile Menu - Simplified for better mobile compatibility */}
       {(isMenuOpen || menuAnimating) && (
         <div
           className={`fixed inset-0 z-40 lg:hidden ${isMenuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
-          style={{
-            perspective: "1000px",
-          }}
         >
-          {/* Circle Animation Element */}
+          {/* Backdrop */}
           <div
-            className={`absolute bg-white w-full h-full ${isMenuOpen ? "scale-100 opacity-100" : "scale-0 opacity-0"}`}
-            style={{
-              transformOrigin: `${menuPosition.x}px ${menuPosition.y}px`,
-              transition:
-                "transform 0.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.3s ease",
-              borderRadius: isMenuOpen ? "0%" : "50%",
-            }}
+            className={`absolute inset-0 bg-black transition-opacity duration-300 ${isMenuOpen ? "opacity-50" : "opacity-0"}`}
+            onClick={closeMenu}
+          />
+
+          {/* Menu Panel */}
+          <div
+            className={`absolute right-0 top-0 h-full w-full max-w-sm bg-white shadow-xl transform transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
           >
             {/* Menu Content */}
-            <div
-              className={`flex flex-col h-full pt-20 ${isMenuOpen ? "opacity-100" : "opacity-0"}`}
-              style={{
-                transition: "opacity 0.3s ease",
-                transitionDelay: isMenuOpen ? "0.2s" : "0s",
-              }}
-            >
+            <div className="flex flex-col h-full pt-16">
+              {/* Close button */}
+              <div className="flex justify-end p-4">
+                <button
+                  onClick={closeMenu}
+                  className="p-2 text-gray-500 hover:text-gray-700 transition-colors"
+                  aria-label="Close menu"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+
               {/* Mobile Navigation Items */}
-              <div className="flex-1 overflow-y-auto">
-                <div className="px-6 py-4">
-                  {navItems.map((item, index) => (
+              <div className="flex-1 overflow-y-auto px-6">
+                <div className="space-y-1">
+                  {navItems.map((item) => (
                     <NavLink
                       key={item.name}
                       to={item.path}
                       onClick={closeMenu}
                       className={({ isActive }) =>
-                        `block py-4 text-lg font-medium font-['Plus Jakarta Sans'] transition-colors border-b border-gray-100 ${
+                        `block py-3 px-4 text-lg font-medium font-['Plus Jakarta Sans'] rounded-lg transition-colors ${
                           isActive
-                            ? "text-[#1b9d3c]"
-                            : "text-gray-800 hover:text-[#1b9d3c]"
+                            ? "text-[#1b9d3c] bg-green-50"
+                            : "text-gray-800 hover:text-[#1b9d3c] hover:bg-gray-50"
                         }`
                       }
-                      style={{
-                        transitionDelay: isMenuOpen
-                          ? `${index * 0.05 + 0.2}s`
-                          : "0s",
-                        transform: isMenuOpen
-                          ? "translateY(0)"
-                          : "translateY(20px)",
-                        opacity: isMenuOpen ? 1 : 0,
-                        transition: "transform 0.3s ease, opacity 0.3s ease",
-                      }}
                     >
                       {item.name}
                     </NavLink>
@@ -264,87 +254,47 @@ const NavigationHeader: React.FC = () => {
               </div>
 
               {/* Mobile Action Buttons */}
-              <div className="px-6 py-6 border-t border-gray-100">
-                <div className="flex flex-col gap-4">
-                  {actionButtons.map((button, index) => (
-                    <div
-                      key={button.name}
-                      style={{
-                        transitionDelay: isMenuOpen
-                          ? `${(navItems.length + index) * 0.05 + 0.2}s`
-                          : "0s",
-                        transform: isMenuOpen
-                          ? "translateY(0)"
-                          : "translateY(20px)",
-                        opacity: isMenuOpen ? 1 : 0,
-                        transition: "transform 0.3s ease, opacity 0.3s ease",
-                      }}
-                    >
-                      {button.name === "Sponsor" ? (
-                        <button
-                          onClick={(e) => {
-                            e.preventDefault();
-                            closeMenu();
-                            toggleModal();
-                          }}
-                          className={`${getButtonStyles(
-                            button.variant
-                          )} w-full flex justify-center items-center text-base py-3`}
-                        >
-                          {button.name}
-                        </button>
-                      ) : (
-                        <Link
-                          to={button.path}
-                          onClick={closeMenu}
-                          className={`${getButtonStyles(
-                            button.variant
-                          )} w-full flex justify-center items-center text-base py-3`}
-                        >
-                          {button.name}
-                        </Link>
-                      )}
-                    </div>
-                  ))}
-                </div>
+              <div className="px-6 py-6 border-t border-gray-100 space-y-3">
+                {actionButtons.map((button) => (
+                  <div key={button.name}>
+                    {button.name === "Create Account" ? (
+                      <a
+                        href={button.path}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={closeMenu}
+                        className={`${getButtonStyles(
+                          button.variant
+                        )} w-full flex justify-center items-center text-base py-3`}
+                      >
+                        {button.name}
+                      </a>
+                    ) : button.name === "Login" ? (
+                      <a
+                        href={button.path}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={closeMenu}
+                        className={`${getButtonStyles(
+                          button.variant
+                        )} w-full flex justify-center items-center text-base py-3`}
+                      >
+                        {button.name}
+                      </a>
+                    ) : (
+                      <Link
+                        to={button.path}
+                        onClick={closeMenu}
+                        className={`${getButtonStyles(
+                          button.variant
+                        )} w-full flex justify-center items-center text-base py-3`}
+                      >
+                        {button.name}
+                      </Link>
+                    )}
+                  </div>
+                ))}
               </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Sponsor Request Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[1100]">
-          <div className="bg-white rounded-lg p-6 w-[90%] max-w-md">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold">Sponsor Request</h2>
-              <button
-                onClick={toggleModal}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-            <p className="text-sm text-gray-600 mb-6">
-              Please confirm that you would like to send a sponsor request.
-            </p>
-            <div className="flex justify-end gap-4">
-              <button
-                onClick={toggleModal}
-                className="px-4 py-2 text-sm text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={simulateRequest}
-                className={`px-4 py-2 text-sm text-white bg-[#1b9d3c] rounded-md hover:bg-[#167d30] ${
-                  isLoading ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-                disabled={isLoading}
-              >
-                {isLoading ? "Sending..." : "Send Request"}
-              </button>
             </div>
           </div>
         </div>
