@@ -6,7 +6,6 @@ import HowItWorks from "~/components/ui/custom/invest/HowItWorks";
 import JoinUS from "~/components/ui/custom/invest/JoinUS";
 import LowInvestment from "~/components/ui/custom/invest/LowInvestment";
 import ReadyInvest from "~/components/ui/custom/invest/ReadyInvest";
-import { InvestorTest } from "~/components/ui/custom/InvestorTest";
 
 export const meta: MetaFunction = () => {
   return [
