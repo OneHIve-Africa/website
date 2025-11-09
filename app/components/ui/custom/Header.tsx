@@ -32,7 +32,7 @@ const actionButtons: ActionButton[] = [
   },
   {
     name: "Get Started",
-    path: "https://app.onehiveafrica.com/register",
+    path: "https://app.onehiveafrica.com/signup",
     variant: "solid",
   },
   // { name: "Invest", path: "/investor", variant: "solid" },

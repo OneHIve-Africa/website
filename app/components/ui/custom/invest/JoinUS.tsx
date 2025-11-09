@@ -22,7 +22,7 @@ const JoinUS: React.FC = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
             <a
-              href="https://app.onehiveafrica.com/register"
+              href="https://app.onehiveafrica.com/signup"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-white text-oha__green rounded-md shadow font-semibold text-lg px-8 py-4 md:px-8 md:py-3 hover:bg-gray-50 transition-colors text-center"
