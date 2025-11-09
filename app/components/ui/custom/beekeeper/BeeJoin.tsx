@@ -21,7 +21,7 @@ const BeeJoin: React.FC = () => {
         </p>
         <div className="flex gap-6 flex-wrap justify-center">
           <a
-            href="https://app.onehiveafrica.com/register"
+            href="https://app.onehiveafrica.com/signup"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-white text-oha__green rounded-md shadow font-semibold text-lg px-8 py-3 hover:bg-gray-50 transition-colors text-center inline-block min-w-[140px]"

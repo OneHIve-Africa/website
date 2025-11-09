@@ -21,7 +21,7 @@ const WaitlistView: React.FC<WaitlistViewProps> = () => {
         </p>
         <div className="flex gap-6 flex-wrap justify-center">
           <a
-            href="https://app.onehiveafrica.com/register"
+            href="https://app.onehiveafrica.com/signup"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-white text-oha__green rounded-md shadow font-semibold text-lg px-5 py-2 hover:bg-gray-50 transition-colors min-w-[160px] text-center inline-block"

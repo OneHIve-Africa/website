@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
 
         {/* Buttons */}
         <div className="flex flex-wrap gap-4 justify-center">
-          <a 
+          <a
             href="https://app.onehiveafrica.com/login"
             target="_blank"
             rel="noopener noreferrer"
@@ -59,8 +59,8 @@ const Footer: React.FC = () => {
           >
             Login
           </a>
-          <a 
-            href="https://app.onehiveafrica.com/register"
+          <a
+            href="https://app.onehiveafrica.com/signup"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm font-bold font-['Plus Jakarta Sans'] transition-colors px-6 py-3 text-oha__green bg-white rounded-md hover:bg-white/80 min-w-[120px] text-center"

@@ -20,7 +20,7 @@ const ReadyInvest: React.FC = () => {
           </p>
           <div className="flex gap-4 flex-wrap">
             <a
-              href="https://app.onehiveafrica.com/register"
+              href="https://app.onehiveafrica.com/signup"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-white text-oha__green rounded-md shadow font-semibold text-lg px-8 py-4 md:px-5 md:py-3 hover:bg-gray-50 transition-colors text-center inline-block min-w-[140px]"
